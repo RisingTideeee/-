@@ -93,4 +93,3 @@ python train_yolo.py --data <数据集yaml文件> --epochs 100 --batch 16 --devi
 2. **端到端训练**：检测和分类一体化
 3. **实时性能**：YOLO系列模型具有优秀的推理速度
 4. **易于部署**：支持多种格式导出（ONNX、TensorRT等）
-
