@@ -1,0 +1,9 @@
+path: D:/Users/CY/Desktop/数字图像处理基础/dataset
+train: images/train
+val: images/val
+
+names: 
+  0: dirt
+  1: runs
+  2: scratch
+  3: water marks
