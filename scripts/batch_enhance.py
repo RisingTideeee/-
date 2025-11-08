@@ -6,6 +6,11 @@
 import argparse
 from pathlib import Path
 import cv2
+import sys
+
+# 添加项目根目录到路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from image_enhancement import ImageEnhancer
 from evaluation import ImageQualityAssessment, DistortionAnalyzer
 

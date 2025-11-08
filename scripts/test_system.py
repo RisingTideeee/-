@@ -5,6 +5,10 @@
 import numpy as np
 import cv2
 import sys
+from pathlib import Path
+
+# 添加项目根目录到路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 def test_imports():
     """测试导入"""

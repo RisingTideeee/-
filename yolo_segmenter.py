@@ -7,6 +7,11 @@ import numpy as np
 from typing import List, Tuple, Optional, Dict
 from ultralytics import YOLO
 from pathlib import Path
+import yaml
+import shutil
+import tempfile
+from tqdm import tqdm
+from image_enhancement import ImageEnhancer
 
 
 class YOLODefectDetector:
@@ -14,7 +19,10 @@ class YOLODefectDetector:
     
     def __init__(self, model_path: Optional[str] = None, 
                  model_size: str = 'n',
-                 task: str = 'segment'):
+                 task: str = 'segment',
+                 enhance: bool = False,
+                 enhance_method: str = 'adaptive',
+                 **enhance_kwargs):
         """
         初始化YOLO检测器
         
@@ -22,10 +30,20 @@ class YOLODefectDetector:
             model_path: 预训练模型路径（.pt文件），如果为None则使用预训练权重
             model_size: 模型大小 ('n', 's', 'm', 'l', 'x')，仅在model_path为None时使用
             task: 任务类型 ('detect' 或 'segment')
+            enhance: 是否使用图像增强
+            enhance_method: 增强方法 ('hist_eq', 'clahe', 'contrast_stretch', 'gamma', 'adaptive')
+            **enhance_kwargs: 增强方法特定参数（如clip_limit, gamma等）
         """
         self.task = task
         self.model = None
         self.class_names = []
+        self.enhance = enhance
+        self.enhance_method = enhance_method
+        self.enhance_kwargs = enhance_kwargs
+        
+        if enhance:
+            self.enhancer = ImageEnhancer()
+            print(f"图像增强已启用，方法: {enhance_method}")
         
         if model_path and Path(model_path).exists():
             print(f"加载自定义模型: {model_path}")
@@ -66,6 +84,13 @@ class YOLODefectDetector:
         """
         if self.model is None:
             raise ValueError("模型未初始化")
+        
+        # 如果启用增强，先对图像进行增强
+        if self.enhance:
+            if self.enhance_method == 'adaptive':
+                image = self.enhancer.adaptive_enhancement(image)
+            else:
+                image = self.enhancer.enhance(image, method=self.enhance_method, **self.enhance_kwargs)
         
         # 执行检测
         results = self.model(
@@ -269,6 +294,215 @@ class YOLOTrainer:
             model_name = f'yolo11{model_size}.pt'
         
         self.model = YOLO(model_name)
+        self.enhancer = ImageEnhancer()
+        self.temp_enhanced_dir = None
+    
+    def _prepare_enhanced_dataset(self, data_yaml: str, 
+                                   enhance_method: str = 'adaptive',
+                                   **enhance_kwargs) -> str:
+        """
+        准备增强后的数据集（创建临时增强数据集）
+        
+        Args:
+            data_yaml: 原始数据集配置文件路径
+            enhance_method: 增强方法 ('hist_eq', 'clahe', 'contrast_stretch', 'gamma', 'adaptive')
+            **enhance_kwargs: 增强方法特定参数
+            
+        Returns:
+            增强后数据集的yaml配置文件路径
+        """
+        print("\n" + "=" * 70)
+        print("开始准备增强数据集...")
+        print("=" * 70)
+        
+        # 读取原始配置
+        with open(data_yaml, 'r', encoding='utf-8') as f:
+            data_config = yaml.safe_load(f)
+        
+        dataset_path = Path(data_yaml).parent
+        original_path = Path(data_config.get('path', dataset_path))
+        
+        # 创建临时增强数据集目录
+        temp_dir = Path(tempfile.mkdtemp(prefix='yolo_enhanced_'))
+        self.temp_enhanced_dir = temp_dir
+        
+        print(f"临时增强数据集目录: {temp_dir}")
+        
+        # 创建目录结构
+        (temp_dir / 'images' / 'train').mkdir(parents=True, exist_ok=True)
+        (temp_dir / 'images' / 'val').mkdir(parents=True, exist_ok=True)
+        (temp_dir / 'labels' / 'train').mkdir(parents=True, exist_ok=True)
+        (temp_dir / 'labels' / 'val').mkdir(parents=True, exist_ok=True)
+        
+        # 处理训练集
+        train_relative = data_config.get('train', 'images/train')
+        train_path = original_path / train_relative if not Path(train_relative).is_absolute() else Path(train_relative)
+        train_labels_path = original_path / 'labels' / 'train'
+        
+        print(f"\n增强训练集图像: {train_path}")
+        train_images = list(train_path.glob('*.jpg')) + list(train_path.glob('*.png'))
+        print(f"找到 {len(train_images)} 张训练图像")
+        
+        for img_path in tqdm(train_images, desc="增强训练图像"):
+            # 读取并增强图像
+            image = cv2.imread(str(img_path))
+            if image is not None:
+                if enhance_method == 'adaptive':
+                    enhanced = self.enhancer.adaptive_enhancement(image)
+                else:
+                    enhanced = self.enhancer.enhance(image, method=enhance_method, **enhance_kwargs)
+                
+                # 保存增强后的图像
+                output_img = temp_dir / 'images' / 'train' / img_path.name
+                cv2.imwrite(str(output_img), enhanced)
+                
+                # 复制标签文件
+                label_file = train_labels_path / (img_path.stem + '.txt')
+                if label_file.exists():
+                    output_label = temp_dir / 'labels' / 'train' / label_file.name
+                    shutil.copy2(label_file, output_label)
+        
+        # 处理验证集
+        val_relative = data_config.get('val', 'images/val')
+        val_path = original_path / val_relative if not Path(val_relative).is_absolute() else Path(val_relative)
+        val_labels_path = original_path / 'labels' / 'val'
+        
+        print(f"\n增强验证集图像: {val_path}")
+        val_images = list(val_path.glob('*.jpg')) + list(val_path.glob('*.png'))
+        print(f"找到 {len(val_images)} 张验证图像")
+        
+        for img_path in tqdm(val_images, desc="增强验证图像"):
+            # 读取并增强图像
+            image = cv2.imread(str(img_path))
+            if image is not None:
+                if enhance_method == 'adaptive':
+                    enhanced = self.enhancer.adaptive_enhancement(image)
+                else:
+                    enhanced = self.enhancer.enhance(image, method=enhance_method, **enhance_kwargs)
+                
+                # 保存增强后的图像
+                output_img = temp_dir / 'images' / 'val' / img_path.name
+                cv2.imwrite(str(output_img), enhanced)
+                
+                # 复制标签文件
+                label_file = val_labels_path / (img_path.stem + '.txt')
+                if label_file.exists():
+                    output_label = temp_dir / 'labels' / 'val' / label_file.name
+                    shutil.copy2(label_file, output_label)
+        
+        # 创建新的yaml配置文件
+        enhanced_config = data_config.copy()
+        enhanced_config['path'] = str(temp_dir.absolute())
+        enhanced_config['train'] = 'images/train'
+        enhanced_config['val'] = 'images/val'
+        # 保持test集路径（如果存在）
+        if 'test' in enhanced_config:
+            test_relative = enhanced_config['test']
+            if not Path(test_relative).is_absolute():
+                enhanced_config['test'] = str((original_path / test_relative).absolute())
+        
+        enhanced_yaml = temp_dir / 'dataset.yaml'
+        with open(enhanced_yaml, 'w', encoding='utf-8') as f:
+            yaml.dump(enhanced_config, f, allow_unicode=True)
+        
+        print(f"\n增强数据集准备完成！")
+        print(f"增强方法: {enhance_method}")
+        print(f"配置文件: {enhanced_yaml}")
+        print("=" * 70)
+        
+        return str(enhanced_yaml)
+    
+    def _prepare_enhanced_test_dataset(self, data_yaml: str,
+                                       enhance_method: str = 'adaptive',
+                                       **enhance_kwargs) -> str:
+        """
+        准备增强后的测试集（创建临时增强测试集）
+        
+        Args:
+            data_yaml: 原始数据集配置文件路径
+            enhance_method: 增强方法 ('hist_eq', 'clahe', 'contrast_stretch', 'gamma', 'adaptive')
+            **enhance_kwargs: 增强方法特定参数
+            
+        Returns:
+            增强后数据集的yaml配置文件路径
+        """
+        print("\n" + "=" * 70)
+        print("开始准备增强测试集...")
+        print("=" * 70)
+        
+        # 读取原始配置
+        with open(data_yaml, 'r', encoding='utf-8') as f:
+            data_config = yaml.safe_load(f)
+        
+        dataset_path = Path(data_yaml).parent
+        original_path = Path(data_config.get('path', dataset_path))
+        
+        # 创建临时增强数据集目录
+        temp_dir = Path(tempfile.mkdtemp(prefix='yolo_enhanced_test_'))
+        self.temp_enhanced_dir = temp_dir
+        
+        print(f"临时增强测试集目录: {temp_dir}")
+        
+        # 创建目录结构
+        (temp_dir / 'images' / 'test').mkdir(parents=True, exist_ok=True)
+        (temp_dir / 'labels' / 'test').mkdir(parents=True, exist_ok=True)
+        
+        # 处理测试集
+        if 'test' not in data_config:
+            print("警告: 数据集配置中没有test集")
+            return data_yaml
+        
+        test_relative = data_config.get('test', 'images/test')
+        test_path = original_path / test_relative if not Path(test_relative).is_absolute() else Path(test_relative)
+        test_labels_path = original_path / 'labels' / 'test'
+        
+        print(f"\n增强测试集图像: {test_path}")
+        test_images = list(test_path.glob('*.jpg')) + list(test_path.glob('*.png'))
+        print(f"找到 {len(test_images)} 张测试图像")
+        
+        for img_path in tqdm(test_images, desc="增强测试图像"):
+            # 读取并增强图像
+            image = cv2.imread(str(img_path))
+            if image is not None:
+                if enhance_method == 'adaptive':
+                    enhanced = self.enhancer.adaptive_enhancement(image)
+                else:
+                    enhanced = self.enhancer.enhance(image, method=enhance_method, **enhance_kwargs)
+                
+                # 保存增强后的图像
+                output_img = temp_dir / 'images' / 'test' / img_path.name
+                cv2.imwrite(str(output_img), enhanced)
+                
+                # 复制标签文件
+                label_file = test_labels_path / (img_path.stem + '.txt')
+                if label_file.exists():
+                    output_label = temp_dir / 'labels' / 'test' / label_file.name
+                    shutil.copy2(label_file, output_label)
+        
+        # 创建新的yaml配置文件
+        enhanced_config = data_config.copy()
+        enhanced_config['path'] = str(temp_dir.absolute())
+        enhanced_config['test'] = 'images/test'
+        # 保持train和val路径（如果存在）
+        if 'train' in enhanced_config:
+            train_relative = enhanced_config['train']
+            if not Path(train_relative).is_absolute():
+                enhanced_config['train'] = str((original_path / train_relative).absolute())
+        if 'val' in enhanced_config:
+            val_relative = enhanced_config['val']
+            if not Path(val_relative).is_absolute():
+                enhanced_config['val'] = str((original_path / val_relative).absolute())
+        
+        enhanced_yaml = temp_dir / 'dataset.yaml'
+        with open(enhanced_yaml, 'w', encoding='utf-8') as f:
+            yaml.dump(enhanced_config, f, allow_unicode=True)
+        
+        print(f"\n增强测试集准备完成！")
+        print(f"增强方法: {enhance_method}")
+        print(f"配置文件: {enhanced_yaml}")
+        print("=" * 70)
+        
+        return str(enhanced_yaml)
     
     def train(self, data_yaml: str,
               epochs: int = 100,
@@ -278,6 +512,8 @@ class YOLOTrainer:
               project: str = 'runs',
               name: str = 'defect_detection',
               patience: int = 50,
+              enhance: bool = False,
+              enhance_method: str = 'adaptive',
               **kwargs):
         """
         训练模型
@@ -291,30 +527,65 @@ class YOLOTrainer:
             project: 项目目录
             name: 实验名称
             patience: 早停耐心值，如果验证指标在patience个epoch内没有提升则停止训练
-            **kwargs: 其他训练参数（如lr0, lrf, weight_decay, dropout等）
+            enhance: 是否使用图像增强（使用自定义增强算法）
+            enhance_method: 增强方法 ('hist_eq', 'clahe', 'contrast_stretch', 'gamma', 'adaptive')
+            **kwargs: 其他训练参数（如lr0, lrf, weight_decay, dropout等）和增强参数（如clip_limit, gamma等）
         """
+        # 分离增强参数和训练参数
+        enhance_kwargs = {}
+        train_kwargs = {}
+        
+        enhance_param_names = ['clip_limit', 'tile_grid_size', 'lower_percent', 
+                              'upper_percent', 'gamma']
+        
+        for key, value in kwargs.items():
+            if key in enhance_param_names:
+                enhance_kwargs[key] = value
+            else:
+                train_kwargs[key] = value
+        
+        # 如果启用增强，准备增强数据集
+        if enhance:
+            enhanced_yaml = self._prepare_enhanced_dataset(
+                data_yaml, 
+                enhance_method=enhance_method,
+                **enhance_kwargs
+            )
+            data_yaml = enhanced_yaml
+        
         # 设置默认参数（如果kwargs中没有指定）
-        train_kwargs = {
+        train_kwargs.update({
             'patience': patience,  # 早停耐心值
             'save': True,  # 保存最佳模型
             'save_period': 10,  # 每10个epoch保存一次
-            **kwargs  # 用户自定义参数优先
-        }
+        })
         
-        results = self.model.train(
-            data=data_yaml,
-            epochs=epochs,
-            imgsz=imgsz,
-            batch=batch,
-            device=device,
-            project=project,
-            name=name,
-            **train_kwargs
-        )
-        
-        print(f"训练完成！模型保存在: {project}/{name}")
-        print(f"最佳模型: {project}/{name}/weights/best.pt")
-        return results
+        try:
+            results = self.model.train(
+                data=data_yaml,
+                epochs=epochs,
+                imgsz=imgsz,
+                batch=batch,
+                device=device,
+                project=project,
+                name=name,
+                **train_kwargs
+            )
+            
+            print(f"\n训练完成！模型保存在: {project}/{name}")
+            print(f"最佳模型: {project}/{name}/weights/best.pt")
+            
+            return results
+        finally:
+            # 清理临时增强数据集
+            if enhance and self.temp_enhanced_dir and self.temp_enhanced_dir.exists():
+                print(f"\n清理临时增强数据集: {self.temp_enhanced_dir}")
+                try:
+                    shutil.rmtree(self.temp_enhanced_dir)
+                    print("临时文件已清理")
+                except Exception as e:
+                    print(f"清理临时文件时出错: {e}")
+                    print(f"请手动删除: {self.temp_enhanced_dir}")
     
     def validate(self, data_yaml: str):
         """

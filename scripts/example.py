@@ -3,6 +3,12 @@
 """
 import cv2
 import numpy as np
+import sys
+from pathlib import Path
+
+# 添加项目根目录到路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from image_enhancement import ImageEnhancer
 from defect_segmentation import DefectSegmenter
 from feature_extraction import FeatureExtractor

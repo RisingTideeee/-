@@ -28,14 +28,28 @@ python train_yolo.py --data dataset/dataset.yaml --epochs 100
 python test_yolo_model.py --model runs/defect_detection6/weights/best.pt
 ```
 
-### 5. 查看验证结果
+### 5. 测试模型性能
 
 ```bash
-# 查看训练结果
-python view_validation_results.py
+# 测试模型并生成详细报告
+python test_yolo_model.py --model runs/defect_detection6/weights/best.pt
 
-# 运行验证并查看结果
-python view_validation_results.py --model runs/defect_detection6/weights/best.pt
+# 查看测试结果
+python show_results.py
+```
+
+### 6. K折交叉验证训练
+
+```bash
+# 5折交叉验证训练
+python train_kfold_cv.py --data dataset/dataset.yaml --k 5 --epochs 100
+```
+
+### 7. 分析训练结果
+
+```bash
+# 分析训练结果，找出最佳epoch
+python scripts/analyze_training.py
 ```
 
 ## 项目结构
@@ -58,17 +72,29 @@ python view_validation_results.py --model runs/defect_detection6/weights/best.pt
 
 ## 详细文档
 
-- [完整使用指南](docs/README.md)
+- [完整使用指南](docs/USAGE.md)
 - [YOLO使用指南](docs/YOLO_USAGE.md)
 - [测试使用指南](docs/TEST_USAGE.md)
+- [图像增强使用指南](docs/ENHANCEMENT_USAGE.md)
+- [批量增强使用指南](docs/BATCH_ENHANCE_USAGE.md)
+
+## 工具脚本
+
+- **`scripts/analyze_training.py`**: 分析训练结果，找出最佳epoch
+- **`scripts/batch_enhance.py`**: 批量图像增强工具
+- **`scripts/compare_image_quality.py`**: 对比增强前后的图像质量
+- **`scripts/prepare_yolo_dataset.py`**: 准备YOLO数据集
+- **`scripts/test_system.py`**: 系统测试脚本
+- **`scripts/example.py`**: 示例演示脚本
 
 ## 验证结果查看
 
 验证结果保存在以下位置：
 
-1. **控制台输出**: 运行 `test_yolo_model.py` 或 `view_validation_results.py` 时直接显示
+1. **控制台输出**: 运行 `test_yolo_model.py` 时直接显示
 2. **训练结果**: `runs/defect_detection*/results.csv` - 包含所有训练轮次的指标
-3. **验证结果**: `runs/defect_detection*/val/` - 包含验证图像和图表（如果生成）
+3. **测试结果**: `test_results/` - 包含测试报告和结果图像
+4. **验证结果**: `runs/defect_detection*/val/` - 包含验证图像和图表（如果生成）
 
-使用 `view_validation_results.py` 脚本可以方便地查看最新的验证结果。
+使用 `show_results.py` 脚本可以方便地查看测试结果。
 

@@ -41,6 +41,15 @@ def main():
                        help='Dropout比率（默认0.0，建议0.1-0.2防止过拟合）')
     parser.add_argument('--cos_lr', action='store_true',
                        help='使用余弦学习率调度（推荐）')
+    parser.add_argument('--enhance', action='store_true',
+                       help='使用自定义图像增强算法（在训练前对图像进行增强）')
+    parser.add_argument('--enhance-method', type=str, default='adaptive',
+                       choices=['hist_eq', 'clahe', 'contrast_stretch', 'gamma', 'adaptive'],
+                       help='图像增强方法（默认：adaptive，自适应增强）')
+    parser.add_argument('--clip-limit', type=float, default=2.0,
+                       help='CLAHE的对比度限制（仅当enhance-method=clahe时使用）')
+    parser.add_argument('--gamma', type=float, default=1.5,
+                       help='伽马值（仅当enhance-method=gamma时使用）')
     
     args = parser.parse_args()
     
@@ -75,6 +84,10 @@ names:
     print(f"批次大小: {args.batch}")
     print(f"设备: {args.device}")
     print(f"早停耐心值: {args.patience}")
+    if args.enhance:
+        print(f"图像增强: 启用 ({args.enhance_method})")
+    else:
+        print("图像增强: 未启用（使用原始图像）")
     print("=" * 50)
     
     # 创建训练器
@@ -98,6 +111,13 @@ names:
         train_kwargs['cos_lr'] = True
         print("使用余弦学习率调度")
     
+    # 准备增强参数
+    if args.enhance:
+        if args.enhance_method == 'clahe':
+            train_kwargs['clip_limit'] = args.clip_limit
+        elif args.enhance_method == 'gamma':
+            train_kwargs['gamma'] = args.gamma
+    
     # 开始训练
     print("\n开始训练...")
     try:
@@ -110,6 +130,8 @@ names:
             project=args.project,
             name=args.name,
             patience=args.patience,
+            enhance=args.enhance,
+            enhance_method=args.enhance_method,
             **train_kwargs
         )
         

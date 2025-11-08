@@ -24,15 +24,31 @@ Thumbs.db
 
 # YOLO specific
 *.cache
-runs/*/weights/last.pt
-runs/*/weights/best.pt
+runs/
+test_results/
+output/
+
+# Model files (large files, exclude from git)
+*.pt
+*.onnx
+*.engine
+*.pth
+*.h5
+
+# Dataset files (too large for git)
+dataset/images/
+dataset/labels/
+dataset/test/
 
 # Temporary files
 *.tmp
 *.log
+*.json.bak
 
-# Large model files (if needed, uncomment)
-# *.pt
-# *.onnx
-# *.engine
+# Analysis reports
+*.md.bak
+training_analysis_report.md
+
+# Code analysis reports
+代码精简分析报告.md
 
