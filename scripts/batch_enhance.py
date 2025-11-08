@@ -34,6 +34,14 @@ def main():
                        help='CLAHE的对比度限制（仅当method=clahe时使用）')
     parser.add_argument('--gamma', type=float, default=1.5,
                        help='伽马值（仅当method=gamma时使用）')
+    parser.add_argument('--gaussian_filter', action='store_true', default=True,
+                       help='是否应用高斯滤波降噪（默认：True，仅当method=adaptive时使用）')
+    parser.add_argument('--no_gaussian_filter', dest='gaussian_filter', action='store_false',
+                       help='禁用高斯滤波')
+    parser.add_argument('--gaussian_kernel_size', type=int, default=6,
+                       help='高斯滤波核大小（默认：6，仅当method=adaptive时使用）')
+    parser.add_argument('--gaussian_sigma', type=float, default=1.0,
+                       help='高斯滤波标准差（默认：1.0，仅当method=adaptive时使用）')
     
     args = parser.parse_args()
     
@@ -52,6 +60,10 @@ def main():
         kwargs['clip_limit'] = args.clip_limit
     elif args.method == 'gamma':
         kwargs['gamma'] = args.gamma
+    elif args.method == 'adaptive':
+        kwargs['apply_gaussian_filter'] = args.gaussian_filter
+        kwargs['gaussian_kernel_size'] = args.gaussian_kernel_size
+        kwargs['gaussian_sigma'] = args.gaussian_sigma
     
     print("=" * 60)
     print("批量图像增强工具")
@@ -69,10 +81,17 @@ def main():
     try:
         if args.method == 'auto':
             # 智能批量增强：根据每张图像的失真类型自动选择方法
+            # 传递adaptive方法的参数（高斯滤波等）
+            adaptive_kwargs = {
+                'apply_gaussian_filter': args.gaussian_filter,
+                'gaussian_kernel_size': args.gaussian_kernel_size,
+                'gaussian_sigma': args.gaussian_sigma
+            }
             stats = _smart_batch_enhance(
                 enhancer, analyzer, iqa,
                 args.input, args.output,
-                args.preserve_structure
+                args.preserve_structure,
+                adaptive_kwargs
             )
         else:
             # 传统批量增强：使用固定方法
@@ -139,7 +158,7 @@ def main():
 
 def _smart_batch_enhance(enhancer: ImageEnhancer, analyzer: DistortionAnalyzer,
                         iqa: ImageQualityAssessment, input_dir: str, output_dir: str,
-                        preserve_structure: bool) -> dict:
+                        preserve_structure: bool, adaptive_kwargs: dict = None) -> dict:
     """
     智能批量增强：根据每张图像的失真类型自动选择增强方法
     
@@ -150,10 +169,13 @@ def _smart_batch_enhance(enhancer: ImageEnhancer, analyzer: DistortionAnalyzer,
         input_dir: 输入目录
         output_dir: 输出目录
         preserve_structure: 是否保持目录结构
+        adaptive_kwargs: adaptive方法的关键字参数（如高斯滤波参数）
         
     Returns:
         处理结果统计字典
     """
+    if adaptive_kwargs is None:
+        adaptive_kwargs = {}
     from pathlib import Path
     from tqdm import tqdm
     
@@ -213,7 +235,8 @@ def _smart_batch_enhance(enhancer: ImageEnhancer, analyzer: DistortionAnalyzer,
             
             # 根据推荐方法增强图像
             if recommended_method == 'adaptive':
-                enhanced = enhancer.adaptive_enhancement(image)
+                # 使用传入的高斯滤波参数（如果提供）
+                enhanced = enhancer.adaptive_enhancement(image, **adaptive_kwargs)
             elif recommended_method == 'clahe':
                 enhanced = enhancer.enhance(image, method='clahe', clip_limit=2.0)
             elif recommended_method == 'hist_eq':

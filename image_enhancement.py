@@ -18,6 +18,27 @@ class ImageEnhancer:
         self.enhanced_image = None
         self.quality_score = None
     
+    def gaussian_filter(self, image: np.ndarray, kernel_size: int = 5, 
+                       sigma: float = 1.0) -> np.ndarray:
+        """
+        高斯滤波：用于降噪，在图像增强之前应用可以减少噪点
+        
+        Args:
+            image: 输入图像
+            kernel_size: 高斯核大小（必须是奇数，如3, 5, 7等）
+            sigma: 高斯核标准差，控制平滑程度（越大越平滑）
+            
+        Returns:
+            滤波后的图像
+        """
+        # 确保kernel_size是奇数
+        if kernel_size % 2 == 0:
+            kernel_size += 1
+        
+        # 应用高斯滤波
+        filtered = cv2.GaussianBlur(image, (kernel_size, kernel_size), sigma)
+        return filtered
+    
     def histogram_equalization(self, image: np.ndarray) -> np.ndarray:
         """
         全局直方图均衡化
@@ -81,14 +102,24 @@ class ImageEnhancer:
             for i in range(3):
                 channel = image[:, :, i]
                 p_low, p_high = np.percentile(channel, [lower_percent, upper_percent])
-                enhanced[:, :, i] = np.clip(
-                    (channel - p_low) * 255.0 / (p_high - p_low), 0, 255
-                ).astype(np.uint8)
+                # 防止除以0或接近0的数
+                diff = p_high - p_low
+                if diff < 1.0:  # 如果差值太小，直接返回原图
+                    enhanced[:, :, i] = channel
+                else:
+                    enhanced[:, :, i] = np.clip(
+                        (channel - p_low) * 255.0 / diff, 0, 255
+                    ).astype(np.uint8)
         else:
             p_low, p_high = np.percentile(image, [lower_percent, upper_percent])
-            enhanced = np.clip(
-                (image - p_low) * 255.0 / (p_high - p_low), 0, 255
-            ).astype(np.uint8)
+            # 防止除以0或接近0的数
+            diff = p_high - p_low
+            if diff < 1.0:  # 如果差值太小，直接返回原图
+                enhanced = image.copy()
+            else:
+                enhanced = np.clip(
+                    (image - p_low) * 255.0 / diff, 0, 255
+                ).astype(np.uint8)
         return enhanced
     
     def gamma_correction(self, image: np.ndarray, gamma: float = 1.5) -> np.ndarray:
@@ -140,20 +171,83 @@ class ImageEnhancer:
         self.enhanced_image = enhanced
         return enhanced
     
-    def adaptive_enhancement(self, image: np.ndarray) -> np.ndarray:
+    def adaptive_enhancement(self, image: np.ndarray, 
+                            apply_gaussian_filter: bool = True,
+                            gaussian_kernel_size: int = 6,
+                            gaussian_sigma: float = 1.0) -> np.ndarray:
         """
-        自适应增强：结合多种方法
+        自适应增强：结合多种方法，使用更温和的参数避免过度处理
+        确保不会让图像变暗
         
         Args:
             image: 输入图像
+            apply_gaussian_filter: 是否在增强后应用高斯滤波（默认True，用于降噪）
+            gaussian_kernel_size: 高斯核大小（默认5）
+            gaussian_sigma: 高斯核标准差（默认1.0）
             
         Returns:
             增强后的图像
         """
-        # 先应用CLAHE
-        clahe_result = self.clahe(image, clip_limit=2.0, tile_grid_size=(8, 8))
-        # 再应用对比度拉伸
-        enhanced = self.contrast_stretching(clahe_result, lower_percent=1.0, upper_percent=99.0)
+        # 转换为灰度图用于分析
+        if len(image.shape) == 3:
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = image
+        
+        # 分析原图特征
+        original_brightness = np.mean(gray)
+        original_contrast = np.std(gray)
+        
+        # 使用更温和的CLAHE参数（降低clip_limit，避免过度增强）
+        clahe_result = self.clahe(image, clip_limit=1.5, tile_grid_size=(8, 8))
+        
+        # 分析CLAHE结果
+        if len(clahe_result.shape) == 3:
+            clahe_gray = cv2.cvtColor(clahe_result, cv2.COLOR_BGR2GRAY)
+        else:
+            clahe_gray = clahe_result
+        
+        clahe_brightness = np.mean(clahe_gray)
+        clahe_contrast = np.std(clahe_gray)
+        
+        # 如果CLAHE导致亮度显著降低（降低超过10%），需要补偿
+        if clahe_brightness < original_brightness * 0.9:
+            # 亮度补偿：使用线性变换提升亮度
+            if len(clahe_result.shape) == 3:
+                # 彩色图像：在LAB空间调整L通道
+                lab = cv2.cvtColor(clahe_result, cv2.COLOR_BGR2LAB)
+                # 提升亮度通道
+                brightness_boost = (original_brightness - clahe_brightness) * 0.5  # 只补偿50%，避免过度
+                lab[:, :, 0] = np.clip(lab[:, :, 0] + brightness_boost, 0, 255).astype(np.uint8)
+                clahe_result = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
+            else:
+                brightness_boost = (original_brightness - clahe_brightness) * 0.5
+                clahe_result = np.clip(clahe_result.astype(np.float32) + brightness_boost, 0, 255).astype(np.uint8)
+        
+        # 检查是否需要对比度拉伸
+        # 只有当对比度仍然较低时才进行拉伸
+        if clahe_contrast < 40 and original_contrast < 30:
+            # 使用非常温和的对比度拉伸（10%和90%）
+            enhanced = self.contrast_stretching(clahe_result, lower_percent=10.0, upper_percent=90.0)
+            
+            # 再次检查亮度，确保没有变暗
+            if len(enhanced.shape) == 3:
+                enhanced_gray = cv2.cvtColor(enhanced, cv2.COLOR_BGR2GRAY)
+            else:
+                enhanced_gray = enhanced
+            
+            enhanced_brightness = np.mean(enhanced_gray)
+            # 如果拉伸后亮度降低，使用CLAHE结果
+            if enhanced_brightness < original_brightness * 0.95:
+                enhanced = clahe_result
+        else:
+            # 对比度已经足够，直接使用CLAHE结果
+            enhanced = clahe_result
+        
+        # 在增强之后应用高斯滤波降噪（平滑增强过程中产生的噪点）
+        if apply_gaussian_filter:
+            enhanced = self.gaussian_filter(enhanced, gaussian_kernel_size, gaussian_sigma)
+        
         self.enhanced_image = enhanced
         return enhanced
     
@@ -174,7 +268,7 @@ class ImageEnhancer:
         enhanced_images = []
         for image in tqdm(images, desc="批量增强中"):
             if method == 'adaptive':
-                enhanced = self.adaptive_enhancement(image)
+                enhanced = self.adaptive_enhancement(image, **kwargs)
             else:
                 enhanced = self.enhance(image, method=method, **kwargs)
             enhanced_images.append(enhanced)
@@ -240,7 +334,7 @@ class ImageEnhancer:
                 
                 # 增强图像
                 if method == 'adaptive':
-                    enhanced = self.adaptive_enhancement(image)
+                    enhanced = self.adaptive_enhancement(image, **kwargs)
                 else:
                     enhanced = self.enhance(image, method=method, **kwargs)
                 
