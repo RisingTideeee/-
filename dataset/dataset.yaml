@@ -1,6 +1,7 @@
-path: D:/Users/CY/Desktop/数字图像处理基础/dataset
+path: ./dataset
 train: images/train
 val: images/val
+test: test/images
 
 names: 
   0: dirt

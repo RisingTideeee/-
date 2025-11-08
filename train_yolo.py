@@ -29,6 +29,18 @@ def main():
                        help='项目目录')
     parser.add_argument('--name', type=str, default='defect_detection',
                        help='实验名称')
+    parser.add_argument('--patience', type=int, default=15,
+                       help='早停耐心值（如果验证指标在patience个epoch内没有提升则停止训练，默认15）')
+    parser.add_argument('--lr0', type=float, default=None,
+                       help='初始学习率（默认使用YOLO默认值0.01）')
+    parser.add_argument('--lrf', type=float, default=None,
+                       help='最终学习率因子（最终学习率=lr0*lrf，默认0.01）')
+    parser.add_argument('--weight_decay', type=float, default=None,
+                       help='权重衰减（默认0.0005）')
+    parser.add_argument('--dropout', type=float, default=None,
+                       help='Dropout比率（默认0.0，建议0.1-0.2防止过拟合）')
+    parser.add_argument('--cos_lr', action='store_true',
+                       help='使用余弦学习率调度（推荐）')
     
     args = parser.parse_args()
     
@@ -62,10 +74,29 @@ names:
     print(f"图像尺寸: {args.imgsz}")
     print(f"批次大小: {args.batch}")
     print(f"设备: {args.device}")
+    print(f"早停耐心值: {args.patience}")
     print("=" * 50)
     
     # 创建训练器
     trainer = YOLOTrainer(model_size=args.model_size, task=args.task)
+    
+    # 准备训练参数
+    train_kwargs = {}
+    if args.lr0 is not None:
+        train_kwargs['lr0'] = args.lr0
+        print(f"初始学习率: {args.lr0}")
+    if args.lrf is not None:
+        train_kwargs['lrf'] = args.lrf
+        print(f"最终学习率因子: {args.lrf}")
+    if args.weight_decay is not None:
+        train_kwargs['weight_decay'] = args.weight_decay
+        print(f"权重衰减: {args.weight_decay}")
+    if args.dropout is not None:
+        train_kwargs['dropout'] = args.dropout
+        print(f"Dropout: {args.dropout}")
+    if args.cos_lr:
+        train_kwargs['cos_lr'] = True
+        print("使用余弦学习率调度")
     
     # 开始训练
     print("\n开始训练...")
@@ -77,7 +108,9 @@ names:
             batch=args.batch,
             device=args.device,
             project=args.project,
-            name=args.name
+            name=args.name,
+            patience=args.patience,
+            **train_kwargs
         )
         
         print("\n训练完成！")

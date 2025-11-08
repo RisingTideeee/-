@@ -2,94 +2,73 @@
 
 本项目实现了基于图像处理和深度学习的汽车漆面缺陷检测系统，支持传统图像处理方法和YOLOv11深度学习模型两种模式。
 
-## 项目结构
+## 快速开始
 
-```
-AImodel/
-├── image_enhancement.py      # 图像增强模块
-├── defect_segmentation.py    # 传统缺陷分割模块
-├── yolo_segmenter.py         # YOLOv11缺陷检测模块（新增）
-├── feature_extraction.py     # 特征提取模块
-├── classification.py          # 分类模块
-├── evaluation.py              # 评价指标模块
-├── main.py                    # 主程序
-├── train_yolo.py              # YOLO模型训练脚本（新增）
-├── prepare_yolo_dataset.py    # YOLO数据集准备脚本（新增）
-└── utils.py                   # 工具函数
-```
-
-## 功能模块
-
-### 1. 图像增强 (30%)
-- 直方图均衡化
-- CLAHE (对比度受限自适应直方图均衡化)
-- 对比度拉伸
-- 图像质量评价 (BRISQUE/NIQE)
-
-### 2. 缺陷分割 (40%)
-**传统方法：**
-- Bradley-Roth 自适应阈值
-- 形态学操作（开运算、闭运算、重建）
-- 连通域分析
-
-**YOLOv11方法（新增）：**
-- 基于深度学习的缺陷检测
-- 支持目标检测和实例分割
-- 自动分类功能
-- IoU 计算
-
-### 3. 特征提取与分类 (30%)
-**传统方法：**
-- Gabor 滤波器特征
-- LBP (局部二值模式) 特征
-- SVM 分类器
-
-**YOLOv11方法：**
-- 端到端检测和分类
-- 无需额外特征提取
-
-## 安装依赖
+### 1. 安装依赖
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 使用方法
-
-### 使用传统方法
+### 2. 使用预训练模型进行检测
 
 ```bash
-python main.py --input <图像路径> --mode all
-```
-
-### 使用YOLOv11模型
-
-```bash
-# 使用预训练模型
 python main.py --input <图像路径> --mode all --use_yolo
-
-# 使用自定义训练模型
-python main.py --input <图像路径> --mode all --use_yolo --yolo_model <模型路径>
-
-# 指定模型大小和任务类型
-python main.py --input <图像路径> --mode all --use_yolo --yolo_size s --yolo_task segment
 ```
 
-### 训练YOLOv11模型
+### 3. 训练自定义模型
 
 ```bash
-python train_yolo.py --data <数据集yaml文件> --epochs 100 --batch 16 --device cuda
+python train_yolo.py --data dataset/dataset.yaml --epochs 100
 ```
 
-## 评价指标
+### 4. 测试模型性能
 
-- **图像增强**: BRISQUE/NIQE 分数
-- **缺陷分割**: IoU (要求 > 50%)
-- **分类**: 准确率、精确率、召回率、F1-Score
+```bash
+python test_yolo_model.py --model runs/defect_detection6/weights/best.pt
+```
 
-## YOLOv11优势
+### 5. 查看验证结果
 
-1. **更高的检测精度**：深度学习模型能够学习更复杂的特征
-2. **端到端训练**：检测和分类一体化
-3. **实时性能**：YOLO系列模型具有优秀的推理速度
-4. **易于部署**：支持多种格式导出（ONNX、TensorRT等）
+```bash
+# 查看训练结果
+python view_validation_results.py
+
+# 运行验证并查看结果
+python view_validation_results.py --model runs/defect_detection6/weights/best.pt
+```
+
+## 项目结构
+
+- **根目录**: 主要功能脚本（main.py, train_yolo.py, test_yolo_model.py等）
+- **docs/**: 详细文档和使用指南
+- **models/**: 预训练模型文件
+- **scripts/**: 工具脚本（分析、批量处理等）
+- **dataset/**: 数据集文件
+- **runs/**: 训练结果和模型权重
+- **output/**: 输出结果
+
+## 主要功能
+
+1. **图像增强**: 直方图均衡化、CLAHE、对比度拉伸等
+2. **缺陷检测**: 
+   - 传统方法：Bradley-Roth自适应阈值、形态学操作
+   - 深度学习方法：YOLOv11目标检测和实例分割
+3. **特征提取与分类**: Gabor滤波器、LBP特征、SVM分类器
+
+## 详细文档
+
+- [完整使用指南](docs/README.md)
+- [YOLO使用指南](docs/YOLO_USAGE.md)
+- [测试使用指南](docs/TEST_USAGE.md)
+
+## 验证结果查看
+
+验证结果保存在以下位置：
+
+1. **控制台输出**: 运行 `test_yolo_model.py` 或 `view_validation_results.py` 时直接显示
+2. **训练结果**: `runs/defect_detection*/results.csv` - 包含所有训练轮次的指标
+3. **验证结果**: `runs/defect_detection*/val/` - 包含验证图像和图表（如果生成）
+
+使用 `view_validation_results.py` 脚本可以方便地查看最新的验证结果。
+

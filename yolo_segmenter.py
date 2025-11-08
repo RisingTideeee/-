@@ -277,6 +277,7 @@ class YOLOTrainer:
               device: str = 'cpu',
               project: str = 'runs',
               name: str = 'defect_detection',
+              patience: int = 50,
               **kwargs):
         """
         训练模型
@@ -289,8 +290,17 @@ class YOLOTrainer:
             device: 设备 ('cpu', 'cuda', '0', '1', etc.)
             project: 项目目录
             name: 实验名称
-            **kwargs: 其他训练参数
+            patience: 早停耐心值，如果验证指标在patience个epoch内没有提升则停止训练
+            **kwargs: 其他训练参数（如lr0, lrf, weight_decay, dropout等）
         """
+        # 设置默认参数（如果kwargs中没有指定）
+        train_kwargs = {
+            'patience': patience,  # 早停耐心值
+            'save': True,  # 保存最佳模型
+            'save_period': 10,  # 每10个epoch保存一次
+            **kwargs  # 用户自定义参数优先
+        }
+        
         results = self.model.train(
             data=data_yaml,
             epochs=epochs,
@@ -299,10 +309,11 @@ class YOLOTrainer:
             device=device,
             project=project,
             name=name,
-            **kwargs
+            **train_kwargs
         )
         
         print(f"训练完成！模型保存在: {project}/{name}")
+        print(f"最佳模型: {project}/{name}/weights/best.pt")
         return results
     
     def validate(self, data_yaml: str):
