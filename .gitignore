@@ -22,33 +22,6 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# YOLO specific
+# Cache files only
 *.cache
-runs/
-test_results/
-output/
-
-# Model files (large files, exclude from git)
-*.pt
-*.onnx
-*.engine
-*.pth
-*.h5
-
-# Dataset files (too large for git)
-dataset/images/
-dataset/labels/
-dataset/test/
-
-# Temporary files
-*.tmp
-*.log
-*.json.bak
-
-# Analysis reports
-*.md.bak
-training_analysis_report.md
-
-# Code analysis reports
-代码精简分析报告.md
 

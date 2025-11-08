@@ -1,0 +1,2501 @@
+{
+  "model_path": "runs/kfold_enhanced_fold13/weights/best.pt",
+  "test_images_dir": "dataset/test/images",
+  "total_images": 34,
+  "total_defects": 127,
+  "avg_defects_per_image": 3.735294117647059,
+  "conf_threshold": 0.25,
+  "iou_threshold": 0.45,
+  "timestamp": "2025-11-08T15:34:47.716969",
+  "results": [
+    {
+      "image_name": "DSC_0012_JPG.rf.74c8f7f3e1874ed84ad39ce3c570f46c.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.9080407023429871,
+          "bbox": [
+            45.0,
+            236.0,
+            511.0,
+            204.0
+          ],
+          "bbox_xyxy": [
+            45.0,
+            236.0,
+            556.0,
+            440.0
+          ],
+          "area": 104244
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.3221474289894104,
+          "bbox": [
+            464.0,
+            611.0,
+            8.0,
+            13.0
+          ],
+          "bbox_xyxy": [
+            464.0,
+            611.0,
+            472.0,
+            624.0
+          ],
+          "area": 104
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0015_JPG.rf.c9453238f4979420c3a34ece029a40d8.jpg",
+      "num_defects": 4,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8649365901947021,
+          "bbox": [
+            400.0,
+            131.0,
+            232.0,
+            450.0
+          ],
+          "bbox_xyxy": [
+            400.0,
+            131.0,
+            632.0,
+            581.0
+          ],
+          "area": 104400
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8174812197685242,
+          "bbox": [
+            100.0,
+            536.0,
+            269.0,
+            103.0
+          ],
+          "bbox_xyxy": [
+            100.0,
+            536.0,
+            369.0,
+            639.0
+          ],
+          "area": 27707
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8146291375160217,
+          "bbox": [
+            265.0,
+            139.0,
+            82.0,
+            351.0
+          ],
+          "bbox_xyxy": [
+            265.0,
+            139.0,
+            347.0,
+            490.0
+          ],
+          "area": 28782
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8091779947280884,
+          "bbox": [
+            266.0,
+            108.0,
+            352.0,
+            45.0
+          ],
+          "bbox_xyxy": [
+            266.0,
+            108.0,
+            618.0,
+            153.0
+          ],
+          "area": 15840
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0018_JPG.rf.ac14e983ccbd11b79c1cfc308a22bae5.jpg",
+      "num_defects": 1,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8710117340087891,
+          "bbox": [
+            115.0,
+            234.0,
+            369.0,
+            122.0
+          ],
+          "bbox_xyxy": [
+            115.0,
+            234.0,
+            484.0,
+            356.0
+          ],
+          "area": 45018
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0022_JPG.rf.92072b5b63572a923227fe4ec2daadd3.jpg",
+      "num_defects": 5,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.9262706637382507,
+          "bbox": [
+            204.0,
+            238.0,
+            205.0,
+            209.0
+          ],
+          "bbox_xyxy": [
+            204.0,
+            238.0,
+            409.0,
+            447.0
+          ],
+          "area": 42845
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5934513211250305,
+          "bbox": [
+            428.0,
+            396.0,
+            14.0,
+            27.0
+          ],
+          "bbox_xyxy": [
+            428.0,
+            396.0,
+            442.0,
+            423.0
+          ],
+          "area": 378
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.4629274308681488,
+          "bbox": [
+            547.0,
+            92.0,
+            11.0,
+            22.0
+          ],
+          "bbox_xyxy": [
+            547.0,
+            92.0,
+            558.0,
+            114.0
+          ],
+          "area": 242
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.42812633514404297,
+          "bbox": [
+            194.0,
+            46.0,
+            11.0,
+            17.0
+          ],
+          "bbox_xyxy": [
+            194.0,
+            46.0,
+            205.0,
+            63.0
+          ],
+          "area": 187
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.3439893424510956,
+          "bbox": [
+            394.0,
+            196.0,
+            13.0,
+            22.0
+          ],
+          "bbox_xyxy": [
+            394.0,
+            196.0,
+            407.0,
+            218.0
+          ],
+          "area": 286
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0034_JPG.rf.0b24ee502db5516b6803ad7686c3ae82.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.796076774597168,
+          "bbox": [
+            171.0,
+            247.0,
+            469.0,
+            361.0
+          ],
+          "bbox_xyxy": [
+            171.0,
+            247.0,
+            640.0,
+            608.0
+          ],
+          "area": 169309
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.47894254326820374,
+          "bbox": [
+            290.0,
+            505.0,
+            33.0,
+            56.0
+          ],
+          "bbox_xyxy": [
+            290.0,
+            505.0,
+            323.0,
+            561.0
+          ],
+          "area": 1848
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.2869107723236084,
+          "bbox": [
+            392.0,
+            516.0,
+            78.0,
+            118.0
+          ],
+          "bbox_xyxy": [
+            392.0,
+            516.0,
+            470.0,
+            634.0
+          ],
+          "area": 9204
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0035_JPG.rf.5dc8ee0711499ab2fc5c4d40db659529.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.9313431978225708,
+          "bbox": [
+            155.0,
+            112.0,
+            237.0,
+            338.0
+          ],
+          "bbox_xyxy": [
+            155.0,
+            112.0,
+            392.0,
+            450.0
+          ],
+          "area": 80106
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.3840649724006653,
+          "bbox": [
+            257.0,
+            90.0,
+            11.0,
+            13.0
+          ],
+          "bbox_xyxy": [
+            257.0,
+            90.0,
+            268.0,
+            103.0
+          ],
+          "area": 143
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0039_JPG.rf.9610328e0aa9d27c3a1c7bb081472fdf.jpg",
+      "num_defects": 9,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.905271589756012,
+          "bbox": [
+            197.0,
+            92.0,
+            163.0,
+            417.0
+          ],
+          "bbox_xyxy": [
+            197.0,
+            92.0,
+            360.0,
+            509.0
+          ],
+          "area": 67971
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5959218144416809,
+          "bbox": [
+            551.0,
+            173.0,
+            9.0,
+            16.0
+          ],
+          "bbox_xyxy": [
+            551.0,
+            173.0,
+            560.0,
+            189.0
+          ],
+          "area": 144
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5887899398803711,
+          "bbox": [
+            574.0,
+            333.0,
+            9.0,
+            16.0
+          ],
+          "bbox_xyxy": [
+            574.0,
+            333.0,
+            583.0,
+            349.0
+          ],
+          "area": 144
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5583306550979614,
+          "bbox": [
+            389.0,
+            216.0,
+            9.0,
+            15.0
+          ],
+          "bbox_xyxy": [
+            389.0,
+            216.0,
+            398.0,
+            231.0
+          ],
+          "area": 135
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5007538199424744,
+          "bbox": [
+            609.0,
+            293.0,
+            10.0,
+            18.0
+          ],
+          "bbox_xyxy": [
+            609.0,
+            293.0,
+            619.0,
+            311.0
+          ],
+          "area": 180
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.4705065190792084,
+          "bbox": [
+            484.0,
+            292.0,
+            10.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            484.0,
+            292.0,
+            494.0,
+            306.0
+          ],
+          "area": 140
+        },
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.4460753798484802,
+          "bbox": [
+            393.0,
+            0.0,
+            246.0,
+            238.0
+          ],
+          "bbox_xyxy": [
+            393.0,
+            0.0,
+            639.0,
+            238.0
+          ],
+          "area": 58548
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.39784863591194153,
+          "bbox": [
+            570.0,
+            398.0,
+            10.0,
+            17.0
+          ],
+          "bbox_xyxy": [
+            570.0,
+            398.0,
+            580.0,
+            415.0
+          ],
+          "area": 170
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.2698933482170105,
+          "bbox": [
+            511.0,
+            55.0,
+            8.0,
+            12.0
+          ],
+          "bbox_xyxy": [
+            511.0,
+            55.0,
+            519.0,
+            67.0
+          ],
+          "area": 96
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0047_JPG.rf.772df7f379013f38c50714fd5418bd25.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8753219246864319,
+          "bbox": [
+            0.0,
+            360.0,
+            153.0,
+            168.0
+          ],
+          "bbox_xyxy": [
+            0.0,
+            360.0,
+            153.0,
+            528.0
+          ],
+          "area": 25704
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8240728974342346,
+          "bbox": [
+            202.0,
+            77.0,
+            434.0,
+            121.0
+          ],
+          "bbox_xyxy": [
+            202.0,
+            77.0,
+            636.0,
+            198.0
+          ],
+          "area": 52514
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0051_JPG.rf.311b11145bb15a5db64c59daa8499f17.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.7433807253837585,
+          "bbox": [
+            511.0,
+            337.0,
+            52.0,
+            297.0
+          ],
+          "bbox_xyxy": [
+            511.0,
+            337.0,
+            563.0,
+            634.0
+          ],
+          "area": 15444
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.6507351398468018,
+          "bbox": [
+            193.0,
+            250.0,
+            43.0,
+            390.0
+          ],
+          "bbox_xyxy": [
+            193.0,
+            250.0,
+            236.0,
+            640.0
+          ],
+          "area": 16770
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.6142522096633911,
+          "bbox": [
+            286.0,
+            100.0,
+            37.0,
+            427.0
+          ],
+          "bbox_xyxy": [
+            286.0,
+            100.0,
+            323.0,
+            527.0
+          ],
+          "area": 15799
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0055_JPG.rf.ae9c6ecf26110d1ac365f061e42adf10.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.9236679077148438,
+          "bbox": [
+            195.0,
+            150.0,
+            208.0,
+            396.0
+          ],
+          "bbox_xyxy": [
+            195.0,
+            150.0,
+            403.0,
+            546.0
+          ],
+          "area": 82368
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8786496520042419,
+          "bbox": [
+            0.0,
+            100.0,
+            167.0,
+            121.0
+          ],
+          "bbox_xyxy": [
+            0.0,
+            100.0,
+            167.0,
+            221.0
+          ],
+          "area": 20207
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.4292149245738983,
+          "bbox": [
+            434.0,
+            412.0,
+            9.0,
+            16.0
+          ],
+          "bbox_xyxy": [
+            434.0,
+            412.0,
+            443.0,
+            428.0
+          ],
+          "area": 144
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0079_JPG.rf.c5ccdec917e3064affcf56f808f649bc.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.8547111749649048,
+          "bbox": [
+            172.0,
+            115.0,
+            306.0,
+            409.0
+          ],
+          "bbox_xyxy": [
+            172.0,
+            115.0,
+            478.0,
+            524.0
+          ],
+          "area": 125154
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.44215378165245056,
+          "bbox": [
+            208.0,
+            69.0,
+            10.0,
+            13.0
+          ],
+          "bbox_xyxy": [
+            208.0,
+            69.0,
+            218.0,
+            82.0
+          ],
+          "area": 130
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.35562583804130554,
+          "bbox": [
+            591.0,
+            119.0,
+            9.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            591.0,
+            119.0,
+            600.0,
+            133.0
+          ],
+          "area": 126
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0086_JPG.rf.9599898d3322b68804a3cef2809e91e3.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.8465366959571838,
+          "bbox": [
+            173.0,
+            198.0,
+            240.0,
+            393.0
+          ],
+          "bbox_xyxy": [
+            173.0,
+            198.0,
+            413.0,
+            591.0
+          ],
+          "area": 94320
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.3923831880092621,
+          "bbox": [
+            122.0,
+            369.0,
+            10.0,
+            16.0
+          ],
+          "bbox_xyxy": [
+            122.0,
+            369.0,
+            132.0,
+            385.0
+          ],
+          "area": 160
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0096_JPG.rf.ed16f91f490dc0cdfc10bab68ae8ce87.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.7209421992301941,
+          "bbox": [
+            18.0,
+            89.0,
+            396.0,
+            418.0
+          ],
+          "bbox_xyxy": [
+            18.0,
+            89.0,
+            414.0,
+            507.0
+          ],
+          "area": 165528
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.44671061635017395,
+          "bbox": [
+            501.0,
+            482.0,
+            10.0,
+            21.0
+          ],
+          "bbox_xyxy": [
+            501.0,
+            482.0,
+            511.0,
+            503.0
+          ],
+          "area": 210
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.27561256289482117,
+          "bbox": [
+            371.0,
+            514.0,
+            8.0,
+            17.0
+          ],
+          "bbox_xyxy": [
+            371.0,
+            514.0,
+            379.0,
+            531.0
+          ],
+          "area": 136
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0106_JPG.rf.74f89b824b43f94834d1c4c5b7cc051a.jpg",
+      "num_defects": 0,
+      "defects": []
+    },
+    {
+      "image_name": "DSC_0107_JPG.rf.9a70e6f8d53196d3e17f004e8de1a63d.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.7601855397224426,
+          "bbox": [
+            100.0,
+            10.0,
+            394.0,
+            490.0
+          ],
+          "bbox_xyxy": [
+            100.0,
+            10.0,
+            494.0,
+            500.0
+          ],
+          "area": 193060
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.5954772233963013,
+          "bbox": [
+            615.0,
+            526.0,
+            24.0,
+            113.0
+          ],
+          "bbox_xyxy": [
+            615.0,
+            526.0,
+            639.0,
+            639.0
+          ],
+          "area": 2712
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0135_JPG.rf.0019bc2e65734e5ad3d90d29cda28409.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8382074236869812,
+          "bbox": [
+            402.0,
+            372.0,
+            74.0,
+            225.0
+          ],
+          "bbox_xyxy": [
+            402.0,
+            372.0,
+            476.0,
+            597.0
+          ],
+          "area": 16650
+        },
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.8231586217880249,
+          "bbox": [
+            180.0,
+            177.0,
+            286.0,
+            358.0
+          ],
+          "bbox_xyxy": [
+            180.0,
+            177.0,
+            466.0,
+            535.0
+          ],
+          "area": 102388
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0139_JPG.rf.7682fde7793d9e1f4cb881cb42f8a1f1.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.5802525877952576,
+          "bbox": [
+            126.0,
+            245.0,
+            230.0,
+            223.0
+          ],
+          "bbox_xyxy": [
+            126.0,
+            245.0,
+            356.0,
+            468.0
+          ],
+          "area": 51290
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.4737170934677124,
+          "bbox": [
+            406.0,
+            584.0,
+            138.0,
+            55.0
+          ],
+          "bbox_xyxy": [
+            406.0,
+            584.0,
+            544.0,
+            639.0
+          ],
+          "area": 7590
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.4438442289829254,
+          "bbox": [
+            457.0,
+            361.0,
+            9.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            457.0,
+            361.0,
+            466.0,
+            375.0
+          ],
+          "area": 126
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0144_JPG.rf.6a74ae77fbc3458e813c2e6087f1825f.jpg",
+      "num_defects": 4,
+      "defects": [
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.7659773230552673,
+          "bbox": [
+            140.0,
+            258.0,
+            225.0,
+            253.0
+          ],
+          "bbox_xyxy": [
+            140.0,
+            258.0,
+            365.0,
+            511.0
+          ],
+          "area": 56925
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.3201858699321747,
+          "bbox": [
+            413.0,
+            405.0,
+            96.0,
+            171.0
+          ],
+          "bbox_xyxy": [
+            413.0,
+            405.0,
+            509.0,
+            576.0
+          ],
+          "area": 16416
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.28007185459136963,
+          "bbox": [
+            524.0,
+            476.0,
+            9.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            524.0,
+            476.0,
+            533.0,
+            490.0
+          ],
+          "area": 126
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.26808884739875793,
+          "bbox": [
+            426.0,
+            178.0,
+            10.0,
+            16.0
+          ],
+          "bbox_xyxy": [
+            426.0,
+            178.0,
+            436.0,
+            194.0
+          ],
+          "area": 160
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0154_JPG.rf.a56b48281b1d0f1cf0b10fd7862656f0.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8347274661064148,
+          "bbox": [
+            0.0,
+            472.0,
+            233.0,
+            70.0
+          ],
+          "bbox_xyxy": [
+            0.0,
+            472.0,
+            233.0,
+            542.0
+          ],
+          "area": 16310
+        },
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.7513827085494995,
+          "bbox": [
+            19.0,
+            236.0,
+            433.0,
+            274.0
+          ],
+          "bbox_xyxy": [
+            19.0,
+            236.0,
+            452.0,
+            510.0
+          ],
+          "area": 118642
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0160_JPG.rf.31c902f38175e2a4c8c8fdb0893dec93.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.8069633841514587,
+          "bbox": [
+            0.0,
+            92.0,
+            515.0,
+            362.0
+          ],
+          "bbox_xyxy": [
+            0.0,
+            92.0,
+            515.0,
+            454.0
+          ],
+          "area": 186430
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.27707570791244507,
+          "bbox": [
+            586.0,
+            463.0,
+            9.0,
+            13.0
+          ],
+          "bbox_xyxy": [
+            586.0,
+            463.0,
+            595.0,
+            476.0
+          ],
+          "area": 117
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0202_JPG.rf.a40ba479ac95628657ac7fef28f35681.jpg",
+      "num_defects": 5,
+      "defects": [
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5299400091171265,
+          "bbox": [
+            319.0,
+            338.0,
+            12.0,
+            23.0
+          ],
+          "bbox_xyxy": [
+            319.0,
+            338.0,
+            331.0,
+            361.0
+          ],
+          "area": 276
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5046766400337219,
+          "bbox": [
+            322.0,
+            530.0,
+            13.0,
+            20.0
+          ],
+          "bbox_xyxy": [
+            322.0,
+            530.0,
+            335.0,
+            550.0
+          ],
+          "area": 260
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.3760300576686859,
+          "bbox": [
+            12.0,
+            420.0,
+            11.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            12.0,
+            420.0,
+            23.0,
+            434.0
+          ],
+          "area": 154
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.36249667406082153,
+          "bbox": [
+            176.0,
+            424.0,
+            10.0,
+            16.0
+          ],
+          "bbox_xyxy": [
+            176.0,
+            424.0,
+            186.0,
+            440.0
+          ],
+          "area": 160
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.26046231389045715,
+          "bbox": [
+            192.0,
+            412.0,
+            9.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            192.0,
+            412.0,
+            201.0,
+            426.0
+          ],
+          "area": 126
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0205_JPG.rf.f3e6dffcd57d6079496f247bff7c2685.jpg",
+      "num_defects": 10,
+      "defects": [
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.9179856777191162,
+          "bbox": [
+            490.0,
+            249.0,
+            70.0,
+            91.0
+          ],
+          "bbox_xyxy": [
+            490.0,
+            249.0,
+            560.0,
+            340.0
+          ],
+          "area": 6370
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6857889890670776,
+          "bbox": [
+            311.0,
+            278.0,
+            14.0,
+            24.0
+          ],
+          "bbox_xyxy": [
+            311.0,
+            278.0,
+            325.0,
+            302.0
+          ],
+          "area": 336
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6740691661834717,
+          "bbox": [
+            550.0,
+            350.0,
+            11.0,
+            19.0
+          ],
+          "bbox_xyxy": [
+            550.0,
+            350.0,
+            561.0,
+            369.0
+          ],
+          "area": 209
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5903407335281372,
+          "bbox": [
+            314.0,
+            565.0,
+            13.0,
+            27.0
+          ],
+          "bbox_xyxy": [
+            314.0,
+            565.0,
+            327.0,
+            592.0
+          ],
+          "area": 351
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5426522493362427,
+          "bbox": [
+            319.0,
+            550.0,
+            14.0,
+            27.0
+          ],
+          "bbox_xyxy": [
+            319.0,
+            550.0,
+            333.0,
+            577.0
+          ],
+          "area": 378
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5270702838897705,
+          "bbox": [
+            160.0,
+            293.0,
+            10.0,
+            17.0
+          ],
+          "bbox_xyxy": [
+            160.0,
+            293.0,
+            170.0,
+            310.0
+          ],
+          "area": 170
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.44895583391189575,
+          "bbox": [
+            499.0,
+            191.0,
+            39.0,
+            67.0
+          ],
+          "bbox_xyxy": [
+            499.0,
+            191.0,
+            538.0,
+            258.0
+          ],
+          "area": 2613
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.38573312759399414,
+          "bbox": [
+            154.0,
+            368.0,
+            12.0,
+            19.0
+          ],
+          "bbox_xyxy": [
+            154.0,
+            368.0,
+            166.0,
+            387.0
+          ],
+          "area": 228
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.3601052761077881,
+          "bbox": [
+            561.0,
+            174.0,
+            62.0,
+            83.0
+          ],
+          "bbox_xyxy": [
+            561.0,
+            174.0,
+            623.0,
+            257.0
+          ],
+          "area": 5146
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.2507535219192505,
+          "bbox": [
+            563.0,
+            243.0,
+            50.0,
+            106.0
+          ],
+          "bbox_xyxy": [
+            563.0,
+            243.0,
+            613.0,
+            349.0
+          ],
+          "area": 5300
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0207_JPG.rf.6d16ad855862fd5911e4d1dcd67f306f.jpg",
+      "num_defects": 7,
+      "defects": [
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6741384863853455,
+          "bbox": [
+            199.0,
+            62.0,
+            9.0,
+            15.0
+          ],
+          "bbox_xyxy": [
+            199.0,
+            62.0,
+            208.0,
+            77.0
+          ],
+          "area": 135
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6415629982948303,
+          "bbox": [
+            471.0,
+            564.0,
+            9.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            471.0,
+            564.0,
+            480.0,
+            578.0
+          ],
+          "area": 126
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6402660012245178,
+          "bbox": [
+            314.0,
+            327.0,
+            15.0,
+            18.0
+          ],
+          "bbox_xyxy": [
+            314.0,
+            327.0,
+            329.0,
+            345.0
+          ],
+          "area": 270
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.5704721212387085,
+          "bbox": [
+            511.0,
+            200.0,
+            63.0,
+            105.0
+          ],
+          "bbox_xyxy": [
+            511.0,
+            200.0,
+            574.0,
+            305.0
+          ],
+          "area": 6615
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.46370452642440796,
+          "bbox": [
+            168.0,
+            279.0,
+            13.0,
+            11.0
+          ],
+          "bbox_xyxy": [
+            168.0,
+            279.0,
+            181.0,
+            290.0
+          ],
+          "area": 143
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.4458247423171997,
+          "bbox": [
+            578.0,
+            347.0,
+            53.0,
+            88.0
+          ],
+          "bbox_xyxy": [
+            578.0,
+            347.0,
+            631.0,
+            435.0
+          ],
+          "area": 4664
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.2518993020057678,
+          "bbox": [
+            198.0,
+            225.0,
+            11.0,
+            9.0
+          ],
+          "bbox_xyxy": [
+            198.0,
+            225.0,
+            209.0,
+            234.0
+          ],
+          "area": 99
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0211_JPG.rf.b3a7380c2f740dba42e53f783c39db1e.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.8020728230476379,
+          "bbox": [
+            518.0,
+            216.0,
+            121.0,
+            140.0
+          ],
+          "bbox_xyxy": [
+            518.0,
+            216.0,
+            639.0,
+            356.0
+          ],
+          "area": 16940
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.7077372074127197,
+          "bbox": [
+            122.0,
+            142.0,
+            111.0,
+            197.0
+          ],
+          "bbox_xyxy": [
+            122.0,
+            142.0,
+            233.0,
+            339.0
+          ],
+          "area": 21867
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5830201506614685,
+          "bbox": [
+            319.0,
+            268.0,
+            11.0,
+            20.0
+          ],
+          "bbox_xyxy": [
+            319.0,
+            268.0,
+            330.0,
+            288.0
+          ],
+          "area": 220
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0215_JPG.rf.ae669350446cd7fd99e5be15ab545a83.jpg",
+      "num_defects": 1,
+      "defects": [
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.4884648323059082,
+          "bbox": [
+            320.0,
+            222.0,
+            13.0,
+            21.0
+          ],
+          "bbox_xyxy": [
+            320.0,
+            222.0,
+            333.0,
+            243.0
+          ],
+          "area": 273
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0229_JPG.rf.5bcc1fa787024a4b42b5ecc0ca811ea3.jpg",
+      "num_defects": 4,
+      "defects": [
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.7665759921073914,
+          "bbox": [
+            427.0,
+            501.0,
+            63.0,
+            135.0
+          ],
+          "bbox_xyxy": [
+            427.0,
+            501.0,
+            490.0,
+            636.0
+          ],
+          "area": 8505
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6473492383956909,
+          "bbox": [
+            309.0,
+            288.0,
+            10.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            309.0,
+            288.0,
+            319.0,
+            302.0
+          ],
+          "area": 140
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.4080843925476074,
+          "bbox": [
+            344.0,
+            509.0,
+            48.0,
+            95.0
+          ],
+          "bbox_xyxy": [
+            344.0,
+            509.0,
+            392.0,
+            604.0
+          ],
+          "area": 4560
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.25435110926628113,
+          "bbox": [
+            351.0,
+            474.0,
+            105.0,
+            67.0
+          ],
+          "bbox_xyxy": [
+            351.0,
+            474.0,
+            456.0,
+            541.0
+          ],
+          "area": 7035
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0250_JPG.rf.4147ad800977c5e2881f7101671cf21a.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5411842465400696,
+          "bbox": [
+            318.0,
+            261.0,
+            14.0,
+            24.0
+          ],
+          "bbox_xyxy": [
+            318.0,
+            261.0,
+            332.0,
+            285.0
+          ],
+          "area": 336
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.4990331828594208,
+          "bbox": [
+            41.0,
+            3.0,
+            38.0,
+            55.0
+          ],
+          "bbox_xyxy": [
+            41.0,
+            3.0,
+            79.0,
+            58.0
+          ],
+          "area": 2090
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.36204710602760315,
+          "bbox": [
+            370.0,
+            309.0,
+            14.0,
+            20.0
+          ],
+          "bbox_xyxy": [
+            370.0,
+            309.0,
+            384.0,
+            329.0
+          ],
+          "area": 280
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0262_JPG.rf.e3ee87bf83e904310741328ce2092e7b.jpg",
+      "num_defects": 4,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8952029943466187,
+          "bbox": [
+            187.0,
+            115.0,
+            136.0,
+            284.0
+          ],
+          "bbox_xyxy": [
+            187.0,
+            115.0,
+            323.0,
+            399.0
+          ],
+          "area": 38624
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8775811791419983,
+          "bbox": [
+            295.0,
+            86.0,
+            311.0,
+            416.0
+          ],
+          "bbox_xyxy": [
+            295.0,
+            86.0,
+            606.0,
+            502.0
+          ],
+          "area": 129376
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.7359670400619507,
+          "bbox": [
+            8.0,
+            202.0,
+            112.0,
+            214.0
+          ],
+          "bbox_xyxy": [
+            8.0,
+            202.0,
+            120.0,
+            416.0
+          ],
+          "area": 23968
+        },
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.5552691221237183,
+          "bbox": [
+            184.0,
+            423.0,
+            323.0,
+            132.0
+          ],
+          "bbox_xyxy": [
+            184.0,
+            423.0,
+            507.0,
+            555.0
+          ],
+          "area": 42636
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0278_JPG.rf.698ff0144e19298a4c48548f301dcdc1.jpg",
+      "num_defects": 3,
+      "defects": [
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.8950017690658569,
+          "bbox": [
+            51.0,
+            150.0,
+            503.0,
+            490.0
+          ],
+          "bbox_xyxy": [
+            51.0,
+            150.0,
+            554.0,
+            640.0
+          ],
+          "area": 246470
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.45954108238220215,
+          "bbox": [
+            313.0,
+            248.0,
+            13.0,
+            14.0
+          ],
+          "bbox_xyxy": [
+            313.0,
+            248.0,
+            326.0,
+            262.0
+          ],
+          "area": 182
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.45909902453422546,
+          "bbox": [
+            228.0,
+            527.0,
+            10.0,
+            15.0
+          ],
+          "bbox_xyxy": [
+            228.0,
+            527.0,
+            238.0,
+            542.0
+          ],
+          "area": 150
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0280_JPG.rf.04a3f95fd714d8a1d540df907f4b07e1.jpg",
+      "num_defects": 2,
+      "defects": [
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6010315418243408,
+          "bbox": [
+            292.0,
+            321.0,
+            12.0,
+            16.0
+          ],
+          "bbox_xyxy": [
+            292.0,
+            321.0,
+            304.0,
+            337.0
+          ],
+          "area": 192
+        },
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.4934855103492737,
+          "bbox": [
+            96.0,
+            125.0,
+            544.0,
+            515.0
+          ],
+          "bbox_xyxy": [
+            96.0,
+            125.0,
+            640.0,
+            640.0
+          ],
+          "area": 280160
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0281_JPG.rf.75959e7e77941001c67610439c2a42ae.jpg",
+      "num_defects": 6,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8508014678955078,
+          "bbox": [
+            43.0,
+            181.0,
+            536.0,
+            291.0
+          ],
+          "bbox_xyxy": [
+            43.0,
+            181.0,
+            579.0,
+            472.0
+          ],
+          "area": 155976
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.802568793296814,
+          "bbox": [
+            31.0,
+            288.0,
+            56.0,
+            69.0
+          ],
+          "bbox_xyxy": [
+            31.0,
+            288.0,
+            87.0,
+            357.0
+          ],
+          "area": 3864
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.651988685131073,
+          "bbox": [
+            541.0,
+            450.0,
+            94.0,
+            116.0
+          ],
+          "bbox_xyxy": [
+            541.0,
+            450.0,
+            635.0,
+            566.0
+          ],
+          "area": 10904
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6350908875465393,
+          "bbox": [
+            376.0,
+            82.0,
+            13.0,
+            21.0
+          ],
+          "bbox_xyxy": [
+            376.0,
+            82.0,
+            389.0,
+            103.0
+          ],
+          "area": 273
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.5582709908485413,
+          "bbox": [
+            237.0,
+            559.0,
+            13.0,
+            22.0
+          ],
+          "bbox_xyxy": [
+            237.0,
+            559.0,
+            250.0,
+            581.0
+          ],
+          "area": 286
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.38683605194091797,
+          "bbox": [
+            557.0,
+            568.0,
+            67.0,
+            72.0
+          ],
+          "bbox_xyxy": [
+            557.0,
+            568.0,
+            624.0,
+            640.0
+          ],
+          "area": 4824
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0296_JPG.rf.cd20e3364e76f2d222e12677de2c55df.jpg",
+      "num_defects": 4,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.6489573121070862,
+          "bbox": [
+            290.0,
+            38.0,
+            61.0,
+            582.0
+          ],
+          "bbox_xyxy": [
+            290.0,
+            38.0,
+            351.0,
+            620.0
+          ],
+          "area": 35502
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6478649377822876,
+          "bbox": [
+            182.0,
+            579.0,
+            9.0,
+            18.0
+          ],
+          "bbox_xyxy": [
+            182.0,
+            579.0,
+            191.0,
+            597.0
+          ],
+          "area": 162
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.6395458579063416,
+          "bbox": [
+            404.0,
+            275.0,
+            10.0,
+            16.0
+          ],
+          "bbox_xyxy": [
+            404.0,
+            275.0,
+            414.0,
+            291.0
+          ],
+          "area": 160
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.32895520329475403,
+          "bbox": [
+            80.0,
+            192.0,
+            11.0,
+            18.0
+          ],
+          "bbox_xyxy": [
+            80.0,
+            192.0,
+            91.0,
+            210.0
+          ],
+          "area": 198
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0324_JPG.rf.11981ef4d397e55cbf0df187c3712f34.jpg",
+      "num_defects": 4,
+      "defects": [
+        {
+          "class_id": 2,
+          "class_name": "scratch",
+          "confidence": 0.8559116125106812,
+          "bbox": [
+            544.0,
+            1.0,
+            95.0,
+            244.0
+          ],
+          "bbox_xyxy": [
+            544.0,
+            1.0,
+            639.0,
+            245.0
+          ],
+          "area": 23180
+        },
+        {
+          "class_id": 1,
+          "class_name": "runs",
+          "confidence": 0.7305295467376709,
+          "bbox": [
+            192.0,
+            28.0,
+            200.0,
+            560.0
+          ],
+          "bbox_xyxy": [
+            192.0,
+            28.0,
+            392.0,
+            588.0
+          ],
+          "area": 112000
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.7256733179092407,
+          "bbox": [
+            326.0,
+            262.0,
+            9.0,
+            15.0
+          ],
+          "bbox_xyxy": [
+            326.0,
+            262.0,
+            335.0,
+            277.0
+          ],
+          "area": 135
+        },
+        {
+          "class_id": 0,
+          "class_name": "dirt",
+          "confidence": 0.3121492564678192,
+          "bbox": [
+            189.0,
+            175.0,
+            8.0,
+            12.0
+          ],
+          "bbox_xyxy": [
+            189.0,
+            175.0,
+            197.0,
+            187.0
+          ],
+          "area": 96
+        }
+      ]
+    },
+    {
+      "image_name": "DSC_0361_JPG.rf.eacee9fc40c5eb392be07e83b4d47133.jpg",
+      "num_defects": 14,
+      "defects": [
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.9162729382514954,
+          "bbox": [
+            145.0,
+            563.0,
+            37.0,
+            40.0
+          ],
+          "bbox_xyxy": [
+            145.0,
+            563.0,
+            182.0,
+            603.0
+          ],
+          "area": 1480
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.906229555606842,
+          "bbox": [
+            355.0,
+            387.0,
+            33.0,
+            50.0
+          ],
+          "bbox_xyxy": [
+            355.0,
+            387.0,
+            388.0,
+            437.0
+          ],
+          "area": 1650
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.8685935139656067,
+          "bbox": [
+            366.0,
+            206.0,
+            32.0,
+            45.0
+          ],
+          "bbox_xyxy": [
+            366.0,
+            206.0,
+            398.0,
+            251.0
+          ],
+          "area": 1440
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.8526366949081421,
+          "bbox": [
+            174.0,
+            296.0,
+            31.0,
+            55.0
+          ],
+          "bbox_xyxy": [
+            174.0,
+            296.0,
+            205.0,
+            351.0
+          ],
+          "area": 1705
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.8411203622817993,
+          "bbox": [
+            161.0,
+            417.0,
+            52.0,
+            52.0
+          ],
+          "bbox_xyxy": [
+            161.0,
+            417.0,
+            213.0,
+            469.0
+          ],
+          "area": 2704
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.7796525955200195,
+          "bbox": [
+            284.0,
+            199.0,
+            34.0,
+            50.0
+          ],
+          "bbox_xyxy": [
+            284.0,
+            199.0,
+            318.0,
+            249.0
+          ],
+          "area": 1700
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.7456845641136169,
+          "bbox": [
+            265.0,
+            261.0,
+            36.0,
+            52.0
+          ],
+          "bbox_xyxy": [
+            265.0,
+            261.0,
+            301.0,
+            313.0
+          ],
+          "area": 1872
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.5976986289024353,
+          "bbox": [
+            254.0,
+            334.0,
+            57.0,
+            61.0
+          ],
+          "bbox_xyxy": [
+            254.0,
+            334.0,
+            311.0,
+            395.0
+          ],
+          "area": 3477
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.5499321222305298,
+          "bbox": [
+            488.0,
+            538.0,
+            48.0,
+            53.0
+          ],
+          "bbox_xyxy": [
+            488.0,
+            538.0,
+            536.0,
+            591.0
+          ],
+          "area": 2544
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.5411441922187805,
+          "bbox": [
+            295.0,
+            256.0,
+            29.0,
+            34.0
+          ],
+          "bbox_xyxy": [
+            295.0,
+            256.0,
+            324.0,
+            290.0
+          ],
+          "area": 986
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.5154902935028076,
+          "bbox": [
+            401.0,
+            169.0,
+            19.0,
+            32.0
+          ],
+          "bbox_xyxy": [
+            401.0,
+            169.0,
+            420.0,
+            201.0
+          ],
+          "area": 608
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.39792174100875854,
+          "bbox": [
+            119.0,
+            626.0,
+            37.0,
+            13.0
+          ],
+          "bbox_xyxy": [
+            119.0,
+            626.0,
+            156.0,
+            639.0
+          ],
+          "area": 481
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.3719128668308258,
+          "bbox": [
+            337.0,
+            258.0,
+            40.0,
+            50.0
+          ],
+          "bbox_xyxy": [
+            337.0,
+            258.0,
+            377.0,
+            308.0
+          ],
+          "area": 2000
+        },
+        {
+          "class_id": 3,
+          "class_name": "water marks",
+          "confidence": 0.3446851968765259,
+          "bbox": [
+            314.0,
+            172.0,
+            47.0,
+            80.0
+          ],
+          "bbox_xyxy": [
+            314.0,
+            172.0,
+            361.0,
+            252.0
+          ],
+          "area": 3760
+        }
+      ]
+    }
+  ]
+}
